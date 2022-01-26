@@ -1,0 +1,15 @@
+/Users/Marielle/Local Documents/GitHub/malden-Personal-Project-1/bin/Debug/net5.0/malden-Personal-Project-1.deps.json
+/Users/Marielle/Local Documents/GitHub/malden-Personal-Project-1/bin/Debug/net5.0/malden-Personal-Project-1.runtimeconfig.json
+/Users/Marielle/Local Documents/GitHub/malden-Personal-Project-1/bin/Debug/net5.0/malden-Personal-Project-1.runtimeconfig.dev.json
+/Users/Marielle/Local Documents/GitHub/malden-Personal-Project-1/bin/Debug/net5.0/malden-Personal-Project-1.dll
+/Users/Marielle/Local Documents/GitHub/malden-Personal-Project-1/bin/Debug/net5.0/ref/malden-Personal-Project-1.dll
+/Users/Marielle/Local Documents/GitHub/malden-Personal-Project-1/bin/Debug/net5.0/malden-Personal-Project-1.pdb
+/Users/Marielle/Local Documents/GitHub/malden-Personal-Project-1/obj/Debug/net5.0/malden-Personal-Project-1.csproj.AssemblyReference.cache
+/Users/Marielle/Local Documents/GitHub/malden-Personal-Project-1/obj/Debug/net5.0/malden-Personal-Project-1.GeneratedMSBuildEditorConfig.editorconfig
+/Users/Marielle/Local Documents/GitHub/malden-Personal-Project-1/obj/Debug/net5.0/malden-Personal-Project-1.AssemblyInfoInputs.cache
+/Users/Marielle/Local Documents/GitHub/malden-Personal-Project-1/obj/Debug/net5.0/malden-Personal-Project-1.AssemblyInfo.cs
+/Users/Marielle/Local Documents/GitHub/malden-Personal-Project-1/obj/Debug/net5.0/malden-Personal-Project-1.csproj.CoreCompileInputs.cache
+/Users/Marielle/Local Documents/GitHub/malden-Personal-Project-1/obj/Debug/net5.0/malden-Personal-Project-1.dll
+/Users/Marielle/Local Documents/GitHub/malden-Personal-Project-1/obj/Debug/net5.0/ref/malden-Personal-Project-1.dll
+/Users/Marielle/Local Documents/GitHub/malden-Personal-Project-1/obj/Debug/net5.0/malden-Personal-Project-1.pdb
+/Users/Marielle/Local Documents/GitHub/malden-Personal-Project-1/obj/Debug/net5.0/malden-Personal-Project-1.genruntimeconfig.cache
