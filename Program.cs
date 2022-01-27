@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 namespace malden_Personal_Project_1
 {
-    class HighScore
-    {
+    
+    class HighScoreTracker
+    {   
         
         /// <summary>
         /// Loads the "scoresfile.txt" file and stores it in list "ScoreList". 
@@ -16,7 +17,13 @@ namespace malden_Personal_Project_1
                 // 1. Create list scoreList
                 // 2. scorelist = file.ReadLines(scoresfile.txt);
                 // 3. return list scorelist
-        return null;
+
+                List<string> scoreList;
+                foreach (string line in File.ReadLines("scoresFile.txt"))
+                {
+                    scoreList += line;
+                }             
+                return scoreList;
         }
 
         /// <summary>
@@ -50,8 +57,28 @@ namespace malden_Personal_Project_1
                 // 9. trim user input
                 // 10. if the score includes letters, display "invalid score" and restart the loop. If the score is only numbers, add the user input to integer userScore
                 // 11. Return int userScore, string userName
-
-            return (-1, null);
+            string userName;
+            string score;
+            int userScore;
+            Console.WriteLine("Please type in your name.");
+            userName = Console.ReadLine();
+            userName.Trim();
+            Console.WriteLine("Please type in your score.");
+        scoreLoop:
+            score = Console.ReadLine();
+            foreach (char c in score)
+            {
+            if (char.IsDigit(c) = false)
+            {
+                Console.WriteLine("Please type in a valid score.");
+                goto scoreLoop;
+            }
+            else 
+            {
+                userScore += c;
+            }
+            }
+            return (userScore, userName);
         }
         /// <summary>
         /// Takes the string "userscore" and compares it to the values in scoresOnly, stopping only when the userScore is greater than the value in an index of scoresOnly.
