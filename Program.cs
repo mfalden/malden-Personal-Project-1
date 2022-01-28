@@ -5,10 +5,10 @@ using System.IO;
 namespace malden_Personal_Project_1
 {
     
-    class HighScoreTracker
+    public class HighScoreTracker
     {   
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             // Feedback(jcollard 2022-01-28): You're off to a great start! I've
             // added a few compilation fixes as well as a handful of TODOs.
@@ -41,7 +41,7 @@ namespace malden_Personal_Project_1
         /// </summary>
         /// <param name="scoresFile">a .txt file storing all scores.</param>
         /// <returns>Returns "ScoreList".</returns>
-        static List<string> LoadScoresFile(string scoresFile)
+        public static List<string> LoadScoresFile(string scoresFile)
         {
                 // 1. Create list scoreList
                 // 2. scorelist = file.ReadLines(scoresfile.txt);
@@ -92,7 +92,7 @@ namespace malden_Personal_Project_1
             int userScore;
             Console.WriteLine("Please type in your name.");
             userName = Console.ReadLine();
-            userName.Trim();
+            userName = userName.Replace(" ", "");
             Console.WriteLine("Please type in your score.");
         scoreLoop:
             score = Console.ReadLine();
@@ -134,7 +134,7 @@ namespace malden_Personal_Project_1
         /// <param name="userScore"></param>
         /// <param name="insertAt"></param>
         /// <param name="scoreList"></param>
-        static void AddScore(string userName, string userScore, int insertAt, List<int> scoreList)//TODO(jcollard 2022-01-28): Add `public` to the beginning of this line
+        public static void AddScore(string userName, string userScore, int insertAt, List<string> scoreList)
         {
                 // 1. Load in the userName, userScore, insertAt, and scoreList variables. 
                 // 2. Create String "entry" $"{userName} {userScore}"
