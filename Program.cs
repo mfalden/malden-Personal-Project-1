@@ -1,11 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO; // Feedback(jcollard 2022-01-28): This allows us to use File.ReadLines
 
 namespace malden_Personal_Project_1
 {
     
     class HighScoreTracker
     {   
+
+        static void Main(string[] args)
+        {
+            // Feedback(jcollard 2022-01-28): You're off to a great start! I've
+            // added a few compilation fixes as well as a handful of TODOs.
+            // In class today, complete the TODOs then move on to Part 2.2.
+        }
         
         /// <summary>
         /// Loads the "scoresfile.txt" file and stores it in list "ScoreList". 
@@ -21,7 +29,7 @@ namespace malden_Personal_Project_1
                 List<string> scoreList;
                 foreach (string line in File.ReadLines("scoresFile.txt"))
                 {
-                    scoreList += line;
+                    scoreList += line; // TODO(jcollard 2022-01-28): Change to scoreList.Add(line)
                 }             
                 return scoreList;
         }
@@ -44,7 +52,7 @@ namespace malden_Personal_Project_1
         /// prompts the user's name and score values and stores them in two strings, "userScore" and "userName".
         /// </summary>
         /// <returns>The function returns userScore and userName.</returns>
-        static (int, string) UserScore()
+        static (int, string) UserScore() //TODO(jcollard 2022-01-28): Add `public` to the beginning of this line
         {
                 // 1. create string userName
                 // 2. create int userScore
@@ -68,14 +76,14 @@ namespace malden_Personal_Project_1
             score = Console.ReadLine();
             foreach (char c in score)
             {
-            if (char.IsDigit(c) = false)
+            if (char.IsDigit(c) = false) // TODO(jcollard 2022-01-28): Change to `char.IsDigit(c) == false`
             {
                 Console.WriteLine("Please type in a valid score.");
                 goto scoreLoop;
             }
             else 
             {
-                userScore += c;
+                userScore += c; // TODO(jcollard 2022-01-28): This error is complaining that userScore has not been initialized. Before the loop, set `userScore = 0`
             }
             }
             return (userScore, userName);
@@ -86,7 +94,7 @@ namespace malden_Personal_Project_1
         /// <param name="scoresOnly">A list containing the scores of past players</param>
         /// <param name="userScore">The user's score</param>
         /// <returns>returns the index number of the row where userScore was greater than scoresOnly in an integer "insertAt".</returns>
-        static int ScoreCompare(List<int> scoresOnly, string userScore)
+        static int ScoreCompare(List<int> scoresOnly, string userScore)//TODO(jcollard 2022-01-28): Add `public` to the beginning of this line
         {
                 // 1. load list<int> scoresOnly and int userScore
                 // 2. create new int inserAt and set to 0
@@ -103,7 +111,7 @@ namespace malden_Personal_Project_1
         /// <param name="userScore"></param>
         /// <param name="insertAt"></param>
         /// <param name="scoreList"></param>
-        static void AddScore(string userName, string userScore, int insertAt, List<int> scoreList)
+        static void AddScore(string userName, string userScore, int insertAt, List<int> scoreList)//TODO(jcollard 2022-01-28): Add `public` to the beginning of this line
         {
                 // 1. Load in the userName, userScore, insertAt, and scoreList variables. 
                 // 2. Create String "entry" $"{userName} {userScore}"
