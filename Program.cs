@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO; // Feedback(jcollard 2022-01-28): This allows us to use File.ReadLines
+using System.IO; 
 
 namespace malden_Personal_Project_1
 {
@@ -27,9 +27,10 @@ namespace malden_Personal_Project_1
                 // 3. return list scorelist
 
                 List<string> scoreList;
+                scoreList = new List<string>();
                 foreach (string line in File.ReadLines("scoresFile.txt"))
                 {
-                    scoreList += line; // TODO(jcollard 2022-01-28): Change to scoreList.Add(line)
+                    scoreList.Add(line);
                 }             
                 return scoreList;
         }
@@ -52,7 +53,7 @@ namespace malden_Personal_Project_1
         /// prompts the user's name and score values and stores them in two strings, "userScore" and "userName".
         /// </summary>
         /// <returns>The function returns userScore and userName.</returns>
-        static (int, string) UserScore() //TODO(jcollard 2022-01-28): Add `public` to the beginning of this line
+        public static (int, string) UserScore() 
         {
                 // 1. create string userName
                 // 2. create int userScore
@@ -74,16 +75,17 @@ namespace malden_Personal_Project_1
             Console.WriteLine("Please type in your score.");
         scoreLoop:
             score = Console.ReadLine();
+            userScore = 0;
             foreach (char c in score)
             {
-            if (char.IsDigit(c) = false) // TODO(jcollard 2022-01-28): Change to `char.IsDigit(c) == false`
+            if (char.IsDigit(c) == false) 
             {
                 Console.WriteLine("Please type in a valid score.");
                 goto scoreLoop;
             }
             else 
             {
-                userScore += c; // TODO(jcollard 2022-01-28): This error is complaining that userScore has not been initialized. Before the loop, set `userScore = 0`
+                userScore += c; 
             }
             }
             return (userScore, userName);
