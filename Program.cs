@@ -13,8 +13,29 @@ namespace malden_Personal_Project_1
             // Feedback(jcollard 2022-01-28): You're off to a great start! I've
             // added a few compilation fixes as well as a handful of TODOs.
             // In class today, complete the TODOs then move on to Part 2.2.
+            if (args.Length > 0 && args[0] == "test")
+            {
+                TestAll();
+                return;
+            }
         }
-        
+        public static void TestAll()
+        {
+            bool testAddScore = TestAddScore.RunTest();
+            Console.WriteLine($"Test AddScore(string userName, string userScore, int insertAt, List<int> scoreList): {testAddScore}");
+
+            bool testLoadScoresFile = TestLoadScoresFile.RunTest();
+            Console.WriteLine($"Test LoadScoresFile(string scoresFile): {testLoadScoresFile}");
+
+            bool testScoreCompare = TestScoreCompare.RunTest();
+            Console.WriteLine($"Test ScoreCompare(List<int> scoresOnly, string userScore): {testScoreCompare}");
+            
+            bool testScoreSplit = TestScoreSplit.RunTest();
+            Console.WriteLine($"Test ScoreSplit(List<string> scoreList): {testScoreSplit}");
+
+            bool testUserScore = TestUserScore.RunTest();
+            Console.WriteLine($"Test UserScore(): {testUserScore}");
+        }
         /// <summary>
         /// Loads the "scoresfile.txt" file and stores it in list "ScoreList". 
         /// </summary>
@@ -96,7 +117,7 @@ namespace malden_Personal_Project_1
         /// <param name="scoresOnly">A list containing the scores of past players</param>
         /// <param name="userScore">The user's score</param>
         /// <returns>returns the index number of the row where userScore was greater than scoresOnly in an integer "insertAt".</returns>
-        static int ScoreCompare(List<int> scoresOnly, string userScore)//TODO(jcollard 2022-01-28): Add `public` to the beginning of this line
+        public static int ScoreCompare(List<int> scoresOnly, string userScore)
         {
                 // 1. load list<int> scoresOnly and int userScore
                 // 2. create new int inserAt and set to 0
