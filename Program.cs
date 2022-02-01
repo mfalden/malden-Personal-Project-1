@@ -87,6 +87,7 @@ namespace malden_Personal_Project_1
                 // 9. trim user input
                 // 10. if the score includes letters, display "invalid score" and restart the loop. If the score is only numbers, add the user input to integer userScore
                 // 11. Return int userScore, string userName
+            // THIS IS NOT WORKING LOL but the test is :)
             string userName;
             string score;
             int userScore;
@@ -95,7 +96,9 @@ namespace malden_Personal_Project_1
             userName = userName.Replace(" ", "");
             Console.WriteLine("Please type in your score.");
         scoreLoop:
+        // I think my error is somewhere in here. Somehow converting "900" to "153". UserName IS working correctly.
             score = Console.ReadLine();
+            score = score.Replace(" ", "");
             userScore = 0;
             foreach (char c in score)
             {
@@ -136,6 +139,7 @@ namespace malden_Personal_Project_1
         /// <param name="scoreList"></param>
         public static void AddScore(string userName, string userScore, int insertAt, List<string> scoreList)
         {
+            string entry;
                 // 1. Load in the userName, userScore, insertAt, and scoreList variables. 
                 // 2. Create String "entry" $"{userName} {userScore}"
                 // 3. Insert "entry" at index "insertAt" 
