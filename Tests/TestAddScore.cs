@@ -13,7 +13,7 @@ namespace malden_Personal_Project_1
             string userName = "TestName";
             string userScore = "900";
             int insertAt = 1; 
-            List<string> scoreList = HighScoreTracker.LoadScoresFile("fake_scores.txt");
+            List<string> scoreList = HighScoreTracker.LoadScoresFile("Tests/fake_scores.txt");
             HighScoreTracker.AddScore(userName, userScore, insertAt, scoreList);
 
             if (scoreList.Count != 4)

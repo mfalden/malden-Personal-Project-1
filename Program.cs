@@ -21,20 +21,20 @@ namespace malden_Personal_Project_1
         }
         public static void TestAll()
         {
-            // bool testAddScore = TestAddScore.RunTest();
-            // Console.WriteLine($"Test AddScore(string userName, string userScore, int insertAt, List<int> scoreList): {testAddScore}");
+            bool testAddScore = TestAddScore.RunTest();
+            Console.WriteLine($"Test AddScore(string userName, string userScore, int insertAt, List<int> scoreList): {testAddScore}");
 
             bool testLoadScoresFile = TestLoadScoresFile.RunTest();
             Console.WriteLine($"Test LoadScoresFile(string scoresFile): {testLoadScoresFile}");
 
-            // bool testScoreCompare = TestScoreCompare.RunTest();
-            // Console.WriteLine($"Test ScoreCompare(List<int> scoresOnly, string userScore): {testScoreCompare}");
+            bool testScoreCompare = TestScoreCompare.RunTest();
+            Console.WriteLine($"Test ScoreCompare(List<int> scoresOnly, string userScore): {testScoreCompare}");
             
-            // bool testScoreSplit = TestScoreSplit.RunTest();
-            // Console.WriteLine($"Test ScoreSplit(List<string> scoreList): {testScoreSplit}");
+            bool testScoreSplit = TestScoreSplit.RunTest();
+            Console.WriteLine($"Test ScoreSplit(List<string> scoreList): {testScoreSplit}");
 
-            // bool testUserScore = TestUserScore.RunTest();
-            // Console.WriteLine($"Test UserScore(): {testUserScore}");
+            bool testUserScore = TestUserScore.RunTest();
+            Console.WriteLine($"Test UserScore(): {testUserScore}");
         }
         /// <summary>
         /// Loads the "scoresfile.txt" file and stores it in list "ScoreList". 

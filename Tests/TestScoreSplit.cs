@@ -8,6 +8,8 @@ namespace malden_Personal_Project_1
     {
         public static bool RunTest()
         {
+            // running into same issue: LoadScoresFile needed for these tests (for transferring scoresFile to scoreList)
+            // HighScoreTracker.ScoreSplit(scoreList);
             return false;
         }
     }
