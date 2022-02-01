@@ -9,10 +9,12 @@ namespace malden_Personal_Project_1
         public static bool RunTest()
         {   
             // Load variables
+            File.Copy("Tests/fake_scores_clean.txt", "Tests/fake_scores.txt", true);
             string userName = "TestName";
             string userScore = "900";
             int insertAt = 1; 
             List<string> scoreList = HighScoreTracker.LoadScoresFile("fake_scores.txt");
+            HighScoreTracker.AddScore(userName, userScore, insertAt, scoreList);
 
             if (scoreList.Count != 4)
             {
@@ -25,7 +27,12 @@ namespace malden_Personal_Project_1
                 Console.Error.WriteLine("The first file should have been \"TestName 900\"");
                 return false;
             }
-            return false;
+
+            else
+            {
+            return true;
+            }
+
         }
     }
 }
