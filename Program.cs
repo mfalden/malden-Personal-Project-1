@@ -22,6 +22,8 @@ namespace malden_Personal_Project_1
         }
         public static void TestAll()
         {
+            // Feedback(jcollard 2022-02-02): Great job on this section.
+            // This section looks like it will report properly.
             bool testAddScore = TestAddScore.RunTest();
             Console.WriteLine($"Test AddScore(string userName, string userScore, int insertAt, List<int> scoreList): {testAddScore}");
 
@@ -109,6 +111,10 @@ namespace malden_Personal_Project_1
             if (char.IsDigit(c) == false) 
             {
                 Console.WriteLine("Please type in a valid score.");
+                // TODO(jcollard 2022-02-02): goto is considered one of the
+                // worst programming practices because it can result in code
+                // incredibly hard to understand. You should replace this with a
+                // while loop instead.
                 goto scoreLoop;
             }
             else 
@@ -118,6 +124,44 @@ namespace malden_Personal_Project_1
             }
             return (userScore, userName);
         }
+
+        // Feedback(jcollard 2022-02-02): Here is an example of how you might
+        // rewrite your code to be a little more manageable. Note: This is
+        // incomplete but shows a high level idea.
+        public static (int, string) FeedbackUserScore()
+        {
+            string userName = null;
+            string score = "somescore";
+            int userScore = -1;
+
+            while (true)
+            {
+                string userInput = Console.ReadLine();
+                if (ValidateScoreInput(userInput))
+                {
+                    return (userScore, userName);        
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input");
+                }
+            }
+        }
+
+        // Feedback(jcollard 2022-02-02): This is a simple method which checks
+        // if the input contains only digits. If it does, returns true. Otherwise, returns false.
+        public static bool ValidateScoreInput(string toCheck)
+        {
+            foreach (char c in toCheck)
+            {
+                if (char.IsDigit(c) == false)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         /// <summary>
         /// Takes the string "userscore" and compares it to the values in scoresOnly, stopping only when the userScore is greater than the value in an index of scoresOnly.
         /// </summary>
