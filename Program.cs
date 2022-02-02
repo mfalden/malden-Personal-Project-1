@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO; 
+using System.Linq; // Feedback(jcollard: 2022-02-01): This allows us to convert a file to a list of strings
 
 namespace malden_Personal_Project_1
 {
@@ -48,8 +49,11 @@ namespace malden_Personal_Project_1
                 // 3. return list scorelist
 
                 List<string> scoreList;
-                scoreList = new List<string>();
-                foreach (string line in File.ReadLines("scoresFile.txt"))
+
+                // Feedback(jcollard 2022-02-01): I modified your code to show you
+                // how to load the file into a list.
+                scoreList = File.ReadAllLines("scoresFile.txt").ToList();
+                foreach (string line in scoreList)
                 {
                     scoreList.Add(line);
                 }             
