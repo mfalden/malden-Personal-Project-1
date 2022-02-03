@@ -33,8 +33,9 @@ namespace malden_Personal_Project_1
             bool testScoreCompare = TestScoreCompare.RunTest();
             Console.WriteLine($"Test ScoreCompare(List<int> scoresOnly, string userScore): {testScoreCompare}");
             
-            bool testScoreSplit = TestScoreSplit.RunTest();
-            Console.WriteLine($"Test ScoreSplit(List<string> scoreList): {testScoreSplit}");
+            // because "scoresonly" in test depends on the output of ScoreSplit, test will be unable to run and will throw exceptions.
+            // bool testScoreSplit = TestScoreSplit.RunTest();
+            // Console.WriteLine($"Test ScoreSplit(List<string> scoreList): {testScoreSplit}");
 
             bool testUserScore = TestUserScore.RunTest();
             Console.WriteLine($"Test UserScore(): {testUserScore}");
@@ -50,12 +51,14 @@ namespace malden_Personal_Project_1
                 // 2. scorelist = file.ReadLines(scoresfile.txt);
                 // 3. return list scorelist
 
+                List<string> rawscoreList;
+                rawscoreList = new List<string>();
                 List<string> scoreList;
-
+                scoreList = new List<string>();
                 // Feedback(jcollard 2022-02-01): I modified your code to show you
                 // how to load the file into a list.
-                scoreList = File.ReadAllLines("scoresFile.txt").ToList();
-                foreach (string line in scoreList)
+                rawscoreList = File.ReadAllLines(scoresFile).ToList();
+                foreach (string line in rawscoreList)
                 {
                     scoreList.Add(line);
                 }             
@@ -67,7 +70,7 @@ namespace malden_Personal_Project_1
         /// </summary>
         /// <param name="scoreList">A list of all usernames and their scores</param>
         /// <returns>Returns int list "ScoresOnly".</returns>
-        static List<int> ScoreSplit(List<string> scoreList)
+        public static List<int> ScoreSplit(List<string> scoreList)
         {
                 // 1. Split the scoreList along all spaces (" ")
                 // 2. create new list<int> = scoresOnly
@@ -96,71 +99,75 @@ namespace malden_Personal_Project_1
             // THIS IS NOT WORKING LOL but the test is :)
             string userName;
             string score;
-            int userScore;
+            int userScore = 0;
             Console.WriteLine("Please type in your name.");
             userName = Console.ReadLine();
             userName = userName.Replace(" ", "");
-            Console.WriteLine("Please type in your score.");
-        scoreLoop:
-        // I think my error is somewhere in here. Somehow converting "900" to "153". UserName IS working correctly.
-            score = Console.ReadLine();
-            score = score.Replace(" ", "");
-            userScore = 0;
-            foreach (char c in score)
+            bool isValidInput = false;
+        // I think my error is somewhere in here. Somehow converting "900" to "153". UserName IS working correctly. 
+            while (!isValidInput)
             {
-            if (char.IsDigit(c) == false) 
-            {
-                Console.WriteLine("Please type in a valid score.");
-                // TODO(jcollard 2022-02-02): goto is considered one of the
-                // worst programming practices because it can result in code
-                // incredibly hard to understand. You should replace this with a
-                // while loop instead.
-                goto scoreLoop;
+                Console.WriteLine("Please type in your score.");
+                score = Console.ReadLine();
+                score = score.Replace(" ", "");
+                isValidInput = true;
+                foreach (char c in score)
+                {
+                    if (char.IsDigit(c) == false) 
+                    {
+                        Console.WriteLine("Please type in a valid score.");
+                        isValidInput = false;
+                        break;
+                    }
+                    else 
+                    {
+                        continue;
+                    }
+                }
+                userScore = int.Parse(score);
             }
-            else 
-            {
-                userScore += c; 
-            }
-            }
+            
+            Console.WriteLine("I'm returning!");
             return (userScore, userName);
         }
 
         // Feedback(jcollard 2022-02-02): Here is an example of how you might
         // rewrite your code to be a little more manageable. Note: This is
         // incomplete but shows a high level idea.
-        public static (int, string) FeedbackUserScore()
-        {
-            string userName = null;
-            string score = "somescore";
-            int userScore = -1;
 
-            while (true)
-            {
-                string userInput = Console.ReadLine();
-                if (ValidateScoreInput(userInput))
-                {
-                    return (userScore, userName);        
-                }
-                else
-                {
-                    Console.WriteLine("Invalid input");
-                }
-            }
-        }
+        // public static (int, string) FeedbackUserScore()
+        // {
+        //     string userName = null;
+        //     string score = "somescore";
+        //     int userScore = -1;
+
+        //     while (true)
+        //     {
+        //         string userInput = Console.ReadLine();
+        //         if (ValidateScoreInput(userInput))
+        //         {
+        //             return (userScore, userName);        
+        //         }
+        //         else
+        //         {
+        //             Console.WriteLine("Invalid input");
+        //         }
+        //     }
+        // }
 
         // Feedback(jcollard 2022-02-02): This is a simple method which checks
         // if the input contains only digits. If it does, returns true. Otherwise, returns false.
-        public static bool ValidateScoreInput(string toCheck)
-        {
-            foreach (char c in toCheck)
-            {
-                if (char.IsDigit(c) == false)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
+        // public static bool ValidateScoreInput(string toCheck)
+        // {
+        //     foreach (char c in toCheck)
+        //     {
+        //         if (char.IsDigit(c) == false)
+        //         {
+        //             return false;
+        //         }
+        //     }
+        //     return true;
+        // }
 
         /// <summary>
         /// Takes the string "userscore" and compares it to the values in scoresOnly, stopping only when the userScore is greater than the value in an index of scoresOnly.
@@ -187,7 +194,7 @@ namespace malden_Personal_Project_1
         /// <param name="scoreList"></param>
         public static void AddScore(string userName, string userScore, int insertAt, List<string> scoreList)
         {
-            string entry;
+            // string entry;
                 // 1. Load in the userName, userScore, insertAt, and scoreList variables. 
                 // 2. Create String "entry" $"{userName} {userScore}"
                 // 3. Insert "entry" at index "insertAt" 

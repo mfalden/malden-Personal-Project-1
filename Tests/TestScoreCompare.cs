@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO; 
+using System.Linq;
 
 namespace malden_Personal_Project_1
 {
@@ -10,9 +11,11 @@ namespace malden_Personal_Project_1
         {
             
             int userScore = 900;
-            List<int> scoresOnly; // finish after LoadScoresFile is tested.
-            // TODO(jcollard 2022-02-01): You need to first initialize scores only to get this to compile. Something like this would work temporarly:
+            List<int> scoresOnly; 
             scoresOnly = new List<int>();
+            scoresOnly.Add(500);
+            scoresOnly.Add(1000);
+            scoresOnly.Add(1500);
             HighScoreTracker.ScoreCompare(scoresOnly, userScore);
             int insertAt = HighScoreTracker.ScoreCompare(scoresOnly, userScore);
             if (insertAt != 1)

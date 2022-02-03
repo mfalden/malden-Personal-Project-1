@@ -10,10 +10,13 @@ namespace malden_Personal_Project_1
         {   
             List<string> scoreList;
             HighScoreTracker.LoadScoresFile("scoresFile.txt");
-            // either issue here (line below) or in code for "ScoreList:System.Collections.Generic.List`1[System.String]" result
             scoreList = HighScoreTracker.LoadScoresFile("scoresFile.txt");
-            Console.WriteLine("ScoreList should be:\n500\n1000\n1500");
-            Console.WriteLine($"ScoreList:{scoreList}");
+            Console.WriteLine("ScoreList should be:\nUser1 500\nUser2 1000\nUser3 1500");
+            Console.WriteLine("ScoreList:");
+            foreach (string line in scoreList)
+            {
+                Console.WriteLine($"{line}");
+            }
             Console.WriteLine("Does this look right to you?");
             return false;
         }
