@@ -9,7 +9,8 @@ namespace malden_Personal_Project_1
     {
         public static bool RunTest()
         {
-            
+            // TODO(jcollard 2022-02-04): This test looks nice! What about a situation where 
+            // the new score is a tie? What should happen?   
             int userScore = 900;
             List<int> scoresOnly; 
             scoresOnly = new List<int>();

@@ -51,6 +51,17 @@ namespace malden_Personal_Project_1
                 // 2. scorelist = file.ReadLines(scoresfile.txt);
                 // 3. return list scorelist
 
+                // Feedback(jcollard 2022-02-04): You're doing a lot of extra
+                // work in this method. There is no need to loop through the
+                // list and copy it to a new list. It could be rewritten as:
+                //
+                // List<string> scoreList;
+                // scoreList = File.ReadAllLines(scoresFile).ToList();
+                // return scoreList;
+                //
+                // Or even just:
+                // return File.ReadAllLines(scoresFile).ToList();
+
                 List<string> rawscoreList;
                 rawscoreList = new List<string>();
                 List<string> scoreList;
@@ -97,6 +108,14 @@ namespace malden_Personal_Project_1
                 // 9. trim user input
                 // 10. if the score includes letters, display "invalid score" and restart the loop. If the score is only numbers, add the user input to integer userScore
                 // 11. Return int userScore, string userName
+
+            // Feedback(jcollard 2022-02-04): Great work getting this to work!
+            // I've added another version below called SimplifiedUserScore()
+            // which I believe is slightly easier to read. It uses a 
+            // `do ... while` loop which allows us to eliminate some of the
+            // redundant code. Additionally, it removes the "makeloopwork"
+            // variable as well as a redundant "else { continue; }"
+            // I hope you find it helpful!
             string userName;
             string score;
             int userScore = 0;
@@ -134,6 +153,37 @@ namespace malden_Personal_Project_1
                 }
             }
             return (userScore, userName);
+        }
+
+        // Feedback(jcollard 2022-02-04): Here is a version of UserScore which I
+        // believe is slightly more concise. Study it, compare it to your
+        // solution and let me know if you have any questions.
+        public static (int, string) SimplifiedUserScore()
+        {
+            string score;
+            bool isValidScore;
+
+            Console.Write("Please type in your name: "); // I use "Write" rather than "WriteLine" which will make the users input appear after the colon
+            string userName = Console.ReadLine().Replace(" ", ""); // We can "chain" these method calls together. 
+
+            do
+            {
+                Console.Write("Enter your score: "); // We now ask this inside of the loop so we only need it once
+                score = Console.ReadLine().Replace(" ", "");
+                isValidScore = true; // Assume the score is valid until we find it is not valid
+                foreach (char c in score)
+                {
+                    if (char.IsDigit(c) == false)
+                    {
+                        Console.WriteLine("Please type in a valid score.");
+                        isValidScore = false; // It wasn't valid so we set isValidScore to false and exit this loop
+                        break;
+                    } // I removed the else { continue; } because it is implied that we will continue
+                }
+            } while (isValidScore == false); // If the score is not valid, loop.
+            
+            // Once we have a valid score, parse it and return it with the userName
+            return (int.Parse(score), userName);
         }
 
         /// <summary>
