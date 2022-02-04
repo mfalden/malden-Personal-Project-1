@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO; 
-using System.Linq; // Feedback(jcollard: 2022-02-01): This allows us to convert a file to a list of strings
+using System.Linq;
 
 namespace malden_Personal_Project_1
 {
@@ -11,9 +11,6 @@ namespace malden_Personal_Project_1
 
         public static void Main(string[] args)
         {
-            // Feedback(jcollard 2022-01-28): You're off to a great start! I've
-            // added a few compilation fixes as well as a handful of TODOs.
-            // In class today, complete the TODOs then move on to Part 2.2.
             if (args.Length > 0 && args[0] == "test")
             {
                 TestAll();
@@ -22,8 +19,6 @@ namespace malden_Personal_Project_1
         }
         public static void TestAll()
         {
-            // Feedback(jcollard 2022-02-02): Great job on this section.
-            // This section looks like it will report properly.
             bool testAddScore = TestAddScore.RunTest();
             Console.WriteLine($"Test AddScore(string userName, string userScore, int insertAt, List<int> scoreList): {testAddScore}");
 
@@ -50,30 +45,14 @@ namespace malden_Personal_Project_1
                 // 1. Create list scoreList
                 // 2. scorelist = file.ReadLines(scoresfile.txt);
                 // 3. return list scorelist
-
-                // Feedback(jcollard 2022-02-04): You're doing a lot of extra
-                // work in this method. There is no need to loop through the
-                // list and copy it to a new list. It could be rewritten as:
-                //
-                // List<string> scoreList;
-                // scoreList = File.ReadAllLines(scoresFile).ToList();
-                // return scoreList;
-                //
-                // Or even just:
-                // return File.ReadAllLines(scoresFile).ToList();
-
-                List<string> rawscoreList;
-                rawscoreList = new List<string>();
                 List<string> scoreList;
-                scoreList = new List<string>();
-                // Feedback(jcollard 2022-02-01): I modified your code to show you
-                // how to load the file into a list.
-                // in use: instead of "scoresfile" insert the scoresfile.txt. OR add in a load-in from the terminal.
-                rawscoreList = File.ReadAllLines(scoresFile).ToList();
-                foreach (string line in rawscoreList)
+                List<string> errorList = new List<string>();
+                errorList.Add("This file does not exist!");
+                if(File.Exists(scoresFile) == false)
                 {
-                    scoreList.Add(line);
-                }             
+                    return errorList;
+                }
+                scoreList = File.ReadAllLines(scoresFile).ToList();
                 return scoreList;
         }
 
@@ -95,9 +74,9 @@ namespace malden_Personal_Project_1
         /// prompts the user's name and score values and stores them in two strings, "userScore" and "userName".
         /// </summary>
         /// <returns>The function returns userScore and userName.</returns>
-        public static (int, string) UserScore() 
+        public static (int, string) UserScore()
         {
-                // 1. create string userName
+            // 1. create string userName
                 // 2. create int userScore
                 // 3. display "please type in your name"
                 // 4. collect user input
@@ -108,84 +87,32 @@ namespace malden_Personal_Project_1
                 // 9. trim user input
                 // 10. if the score includes letters, display "invalid score" and restart the loop. If the score is only numbers, add the user input to integer userScore
                 // 11. Return int userScore, string userName
-
-            // Feedback(jcollard 2022-02-04): Great work getting this to work!
-            // I've added another version below called SimplifiedUserScore()
-            // which I believe is slightly easier to read. It uses a 
-            // `do ... while` loop which allows us to eliminate some of the
-            // redundant code. Additionally, it removes the "makeloopwork"
-            // variable as well as a redundant "else { continue; }"
-            // I hope you find it helpful!
-            string userName;
-            string score;
-            int userScore = 0;
-            Console.WriteLine("Please type in your name.");
-            userName = Console.ReadLine();
-            userName = userName.Replace(" ", "");
-            Console.WriteLine("Please type in your score.");
-            bool makeloopwork = true;
-            bool isValidScore = true;
-            while (makeloopwork)
-            {   isValidScore = true;
-                score = Console.ReadLine();
-                score = score.Replace(" ", "");
-                foreach (char c in score)
-                {
-                    if (char.IsDigit(c) == false) 
-                    {
-                        Console.WriteLine("Please type in a valid score.");
-                        isValidScore = false;
-                        break;
-                    }
-                    else 
-                    {
-                        continue;
-                    }
-                }
-                if (isValidScore)
-                {
-                userScore = int.Parse(score);
-                makeloopwork = false;
-                }
-                else 
-                {
-                    continue;
-                }
-            }
-            return (userScore, userName);
-        }
-
-        // Feedback(jcollard 2022-02-04): Here is a version of UserScore which I
-        // believe is slightly more concise. Study it, compare it to your
-        // solution and let me know if you have any questions.
-        public static (int, string) SimplifiedUserScore()
-        {
             string score;
             bool isValidScore;
 
-            Console.Write("Please type in your name: "); // I use "Write" rather than "WriteLine" which will make the users input appear after the colon
-            string userName = Console.ReadLine().Replace(" ", ""); // We can "chain" these method calls together. 
+            Console.Write("Please type in your name: "); 
+            string userName = Console.ReadLine().Replace(" ", ""); 
 
             do
             {
-                Console.Write("Enter your score: "); // We now ask this inside of the loop so we only need it once
+                Console.Write("Enter your score: "); 
                 score = Console.ReadLine().Replace(" ", "");
-                isValidScore = true; // Assume the score is valid until we find it is not valid
+                isValidScore = true; 
                 foreach (char c in score)
                 {
                     if (char.IsDigit(c) == false)
                     {
                         Console.WriteLine("Please type in a valid score.");
-                        isValidScore = false; // It wasn't valid so we set isValidScore to false and exit this loop
+                        isValidScore = false; 
                         break;
-                    } // I removed the else { continue; } because it is implied that we will continue
+                    } 
                 }
-            } while (isValidScore == false); // If the score is not valid, loop.
+            } while (isValidScore == false); 
             
-            // Once we have a valid score, parse it and return it with the userName
+            
             return (int.Parse(score), userName);
         }
-
+        
         /// <summary>
         /// Takes the string "userscore" and compares it to the values in scoresOnly, stopping only when the userScore is greater than the value in an index of scoresOnly.
         /// </summary>
@@ -198,7 +125,9 @@ namespace malden_Personal_Project_1
                 // 2. create new int inserAt and set to 0
                 // 3. start of loop: for each line in scoresOnly--
                 // 4. if the user score is less than scoresOnly, increase int insertAt by one and restart the loop
+                // 5.0 if the user score is equal to scoresOnly, return int insertAt
                 // 5. if the user score is greater than scores only, return int insertAt
+            
             return -1;
         }
 

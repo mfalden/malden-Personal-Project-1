@@ -18,6 +18,11 @@ namespace malden_Personal_Project_1
             {
                 Console.WriteLine($"{line}");
             }
+            List<string> fail = HighScoreTracker.LoadScoresFile("notAFile.txt");
+            foreach (string line in fail)
+            {
+                Console.WriteLine($"Testing instance of a file that does not exist:\nExpected: 'This file does not exist!'\nReturned: '{line}'");
+            }
             Console.WriteLine("Does this look right to you?");
             return false;
         }

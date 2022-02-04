@@ -25,10 +25,19 @@ namespace malden_Personal_Project_1
                 Console.Error.WriteLine($"Int insertAt: {insertAt}");
                 return false;
             }
-            else 
+            List<int> scoresOnly2;
+            scoresOnly2 = new List<int>();
+            scoresOnly2.Add(500);
+            scoresOnly2.Add(900);
+            scoresOnly2.Add(1000);
+            scoresOnly2.Add(1500);
+            HighScoreTracker.ScoreCompare(scoresOnly2, userScore);
+            if (insertAt != 1)
             {
+                Console.Error.WriteLine("Testing a tie: Int inserAt should be 1, but that is not the case.");
+                Console.Error.WriteLine($"Int insertAt: {insertAt}");
+            }
                 return true;
-            } 
         }
     }
 }
