@@ -57,6 +57,7 @@ namespace malden_Personal_Project_1
                 scoreList = new List<string>();
                 // Feedback(jcollard 2022-02-01): I modified your code to show you
                 // how to load the file into a list.
+                // in use: instead of "scoresfile" insert the scoresfile.txt. OR add in a load-in from the terminal.
                 rawscoreList = File.ReadAllLines(scoresFile).ToList();
                 foreach (string line in rawscoreList)
                 {
@@ -96,27 +97,25 @@ namespace malden_Personal_Project_1
                 // 9. trim user input
                 // 10. if the score includes letters, display "invalid score" and restart the loop. If the score is only numbers, add the user input to integer userScore
                 // 11. Return int userScore, string userName
-            // THIS IS NOT WORKING LOL but the test is :)
             string userName;
             string score;
             int userScore = 0;
             Console.WriteLine("Please type in your name.");
             userName = Console.ReadLine();
             userName = userName.Replace(" ", "");
-            bool isValidInput = false;
-        // I think my error is somewhere in here. Somehow converting "900" to "153". UserName IS working correctly. 
-            while (!isValidInput)
-            {
-                Console.WriteLine("Please type in your score.");
+            Console.WriteLine("Please type in your score.");
+            bool makeloopwork = true;
+            bool isValidScore = true;
+            while (makeloopwork)
+            {   isValidScore = true;
                 score = Console.ReadLine();
                 score = score.Replace(" ", "");
-                isValidInput = true;
                 foreach (char c in score)
                 {
                     if (char.IsDigit(c) == false) 
                     {
                         Console.WriteLine("Please type in a valid score.");
-                        isValidInput = false;
+                        isValidScore = false;
                         break;
                     }
                     else 
@@ -124,50 +123,18 @@ namespace malden_Personal_Project_1
                         continue;
                     }
                 }
+                if (isValidScore)
+                {
                 userScore = int.Parse(score);
+                makeloopwork = false;
+                }
+                else 
+                {
+                    continue;
+                }
             }
-            
-            Console.WriteLine("I'm returning!");
             return (userScore, userName);
         }
-
-        // Feedback(jcollard 2022-02-02): Here is an example of how you might
-        // rewrite your code to be a little more manageable. Note: This is
-        // incomplete but shows a high level idea.
-
-        // public static (int, string) FeedbackUserScore()
-        // {
-        //     string userName = null;
-        //     string score = "somescore";
-        //     int userScore = -1;
-
-        //     while (true)
-        //     {
-        //         string userInput = Console.ReadLine();
-        //         if (ValidateScoreInput(userInput))
-        //         {
-        //             return (userScore, userName);        
-        //         }
-        //         else
-        //         {
-        //             Console.WriteLine("Invalid input");
-        //         }
-        //     }
-        // }
-
-        // Feedback(jcollard 2022-02-02): This is a simple method which checks
-        // if the input contains only digits. If it does, returns true. Otherwise, returns false.
-        // public static bool ValidateScoreInput(string toCheck)
-        // {
-        //     foreach (char c in toCheck)
-        //     {
-        //         if (char.IsDigit(c) == false)
-        //         {
-        //             return false;
-        //         }
-        //     }
-        //     return true;
-        // }
 
         /// <summary>
         /// Takes the string "userscore" and compares it to the values in scoresOnly, stopping only when the userScore is greater than the value in an index of scoresOnly.
@@ -199,7 +166,7 @@ namespace malden_Personal_Project_1
                 // 2. Create String "entry" $"{userName} {userScore}"
                 // 3. Insert "entry" at index "insertAt" 
                 // 4. Using WriteLine, Display list scoreList
-                // 5. Using File.WriteLines, override all entries in scoresFile.txt to be entries in list scoreList
+                // 5. Using File.WriteLines, override all entries in scoresFile.txt to be entries from list scoreList
         }
     }
 }

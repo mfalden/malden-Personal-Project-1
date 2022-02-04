@@ -9,7 +9,6 @@ namespace malden_Personal_Project_1
     {
         public static bool RunTest()
         {
-            // running into same issue: LoadScoresFile needed for these tests (for transferring scoresFile to scoreList)
             List<string> rawscoreList; 
             rawscoreList = File.ReadAllLines("Tests/fake_scores.txt").ToList();
             List<string> scoreList; 
