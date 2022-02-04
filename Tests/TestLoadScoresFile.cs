@@ -8,6 +8,7 @@ namespace malden_Personal_Project_1
     {
         public static bool RunTest()
         {   
+            // TODO(jcollard 2022-02-04): What should happen if you call this method with a file that does not exist? e.g. LoadScoresFile("NotAFile.txt")
             List<string> scoreList;
             HighScoreTracker.LoadScoresFile("scoresFile.txt");
             scoreList = HighScoreTracker.LoadScoresFile("scoresFile.txt");
