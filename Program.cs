@@ -65,6 +65,11 @@ namespace malden_Personal_Project_1
                 // 2. create new list<int> = scoresOnly
                 // 3. add element 2 using int.Parse(scoresOnly[1]);
                 // 4. return list<int> scoresOnly;
+
+            //     List<int> scoresOnly = new List<int>();
+            //     scoreList.Split(' ');
+            //     scoresOnly = int.Parse(scoreList[1]);
+            //     return scoresOnly;
             return null;
         }
 
@@ -125,8 +130,20 @@ namespace malden_Personal_Project_1
                 // 4. if the user score is less than scoresOnly, increase int insertAt by one and restart the loop
                 // 5.0 if the user score is equal to scoresOnly, return int insertAt
                 // 5. if the user score is greater than scores only, return int insertAt
+                int insertAt = 0;
+                foreach (int line in scoresOnly)
+                {
+                    if (userScore < line)
+                    {
+                        insertAt = insertAt + 1;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
             
-            return -1;
+            return insertAt;
         }
 
         /// <summary>
@@ -144,6 +161,16 @@ namespace malden_Personal_Project_1
                 // 3. Insert "entry" at index "insertAt" 
                 // 4. Using WriteLine, Display list scoreList
                 // 5. Using File.WriteLines, override all entries in scoresFile.txt to be entries from list scoreList
+                string entry;
+                //insertAt = string.Parse(insertAt);
+                entry = $"{userName} {userScore}";
+                scoreList.Insert(insertAt, entry);
+                foreach (string line in scoreList)
+                {
+                    Console.WriteLine($"{line}");
+                }
+                File.WriteAllLines("Tests/fake_scores.txt", scoreList);
+
         }
     }
 }
