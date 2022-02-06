@@ -50,6 +50,10 @@ namespace malden_Personal_Project_1
                 errorList.Add("This file does not exist!");
                 if(File.Exists(scoresFile) == false)
                 {
+                    // Feedback(jcollard 2022-02-05): I would recommend either
+                    // throwing an exception or returning null:
+                    //
+                    // throw new Exception($"The file {scoresFile} does not exist.");
                     return errorList;
                 }
                 scoreList = File.ReadAllLines(scoresFile).ToList();
