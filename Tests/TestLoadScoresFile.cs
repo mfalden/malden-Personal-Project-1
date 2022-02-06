@@ -25,6 +25,7 @@ namespace malden_Personal_Project_1
             try 
             {
                 HighScoreTracker.LoadScoresFile("notAFile.txt");
+                return false;
             }
             catch
             {
