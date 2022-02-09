@@ -10,7 +10,7 @@ namespace malden_Personal_Project_1
         public static bool RunTest()
         {
             List<string> rawscoreList; 
-            rawscoreList = File.ReadAllLines("Tests/fake_scores.txt").ToList();
+            rawscoreList = File.ReadAllLines("Tests/fake_scores_clean.txt").ToList();
             List<string> scoreList; 
             scoreList = new List<string>();
                 foreach (string line in rawscoreList)
@@ -25,9 +25,15 @@ namespace malden_Personal_Project_1
             Console.WriteLine("ScoresOnly:");
             foreach (int score in scoresOnly)
             {
-                Console.WriteLine($"\n{score}");
+                Console.WriteLine($"{score}");
             }
-            Console.WriteLine("Does this look right to you?");
+            Console.Write("Does this look correct? Type 'y' to pass.");
+            string input = Console.ReadLine();
+            if (input != "y")
+            {
+                return false;
+            }
+
             return false;
         }
     }

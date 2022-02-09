@@ -29,8 +29,8 @@ namespace malden_Personal_Project_1
             Console.WriteLine($"Test ScoreCompare(List<int> scoresOnly, string userScore): {testScoreCompare}");
             
             // because "scoresonly" in test depends on the output of ScoreSplit, test will be unable to run and will throw exceptions.
-            // bool testScoreSplit = TestScoreSplit.RunTest();
-            // Console.WriteLine($"Test ScoreSplit(List<string> scoreList): {testScoreSplit}");
+            bool testScoreSplit = TestScoreSplit.RunTest();
+            Console.WriteLine($"Test ScoreSplit(List<string> scoreList): {testScoreSplit}");
 
             bool testUserScore = TestUserScore.RunTest();
             Console.WriteLine($"Test UserScore(): {testUserScore}");
@@ -66,10 +66,12 @@ namespace malden_Personal_Project_1
                 // 3. add element 2 using int.Parse(scoresOnly[1]);
                 // 4. return list<int> scoresOnly;
 
-                // List<int> scoresOnly = new List<int>();
-                // scoresOnly = int.Parse(scoreList.Split(' ')[1]);
-                // return scoresOnly;
-            return null;
+                List<int> scoresOnly = new List<int>();
+                foreach (string line in scoreList)
+                {
+                scoresOnly.Add(int.Parse(line.Split(' ')[1]));
+                }
+                return scoresOnly;
         }
 
         /// <summary>
