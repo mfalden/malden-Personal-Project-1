@@ -16,24 +16,42 @@ namespace malden_Personal_Project_1
                 TestAll();
                 return;
             }
+
+            if (args.Length > 0 && args[0] == "runcode")
+            {
+                RunCode();
+                return;
+            }
+
         }
         public static void TestAll()
         {
-            bool testAddScore = TestAddScore.RunTest();
-            Console.WriteLine($"Test AddScore(string userName, string userScore, int insertAt, List<int> scoreList): {testAddScore}");
+            // bool testAddScore = TestAddScore.RunTest();
+            // Console.WriteLine($"Test AddScore(string userName, string userScore, int insertAt, List<int> scoreList): {testAddScore}");
 
-            bool testLoadScoresFile = TestLoadScoresFile.RunTest();
-            Console.WriteLine($"Test LoadScoresFile(string scoresFile): {testLoadScoresFile}");
+            // bool testLoadScoresFile = TestLoadScoresFile.RunTest();
+            // Console.WriteLine($"Test LoadScoresFile(string scoresFile): {testLoadScoresFile}");
 
             bool testScoreCompare = TestScoreCompare.RunTest();
             Console.WriteLine($"Test ScoreCompare(List<int> scoresOnly, string userScore): {testScoreCompare}");
             
             // because "scoresonly" in test depends on the output of ScoreSplit, test will be unable to run and will throw exceptions.
-            bool testScoreSplit = TestScoreSplit.RunTest();
-            Console.WriteLine($"Test ScoreSplit(List<string> scoreList): {testScoreSplit}");
+            // bool testScoreSplit = TestScoreSplit.RunTest();
+            // Console.WriteLine($"Test ScoreSplit(List<string> scoreList): {testScoreSplit}");
 
-            bool testUserScore = TestUserScore.RunTest();
-            Console.WriteLine($"Test UserScore(): {testUserScore}");
+            // bool testUserScore = TestUserScore.RunTest();
+            // Console.WriteLine($"Test UserScore(): {testUserScore}");
+        }
+
+        public static void RunCode()
+        {   
+            Console.WriteLine("High Score Tracker");
+            string fileName = "scoresFile.txt";
+            List<string>scoreList = LoadScoresFile(fileName);
+            List<int> scoresOnly = ScoreSplit(scoreList);
+            (int userScore, string userName) = UserScore();
+            int insertAt = ScoreCompare(scoresOnly, userScore);
+            AddScore(userName, userScore, insertAt, scoreList, fileName);
         }
         /// <summary>
         /// Loads the "scoresfile.txt" file and stores it in list "ScoreList". 
@@ -51,6 +69,7 @@ namespace malden_Personal_Project_1
                     throw new Exception($"The file {scoresFile} does not exist.");
                 }
                 scoreList = File.ReadAllLines(scoresFile).ToList();
+         
                 return scoreList;
         }
 
@@ -69,7 +88,10 @@ namespace malden_Personal_Project_1
                 List<int> scoresOnly = new List<int>();
                 foreach (string line in scoreList)
                 {
-                scoresOnly.Add(int.Parse(line.Split(' ')[1]));
+                    if (!line.Equals(""))
+                    {
+                        scoresOnly.Add(int.Parse(line.Split(' ')[1]));
+                    }
                 }
                 return scoresOnly;
         }
@@ -132,27 +154,19 @@ namespace malden_Personal_Project_1
                 // 5.0 if the user score is equal to scoresOnly, return int insertAt
                 // 5. if the user score is greater than scores only, return int insertAt
                 int insertAt = 0;
-                bool isBigger = false;
-                do  
-                {
                 foreach (int line in scoresOnly)
                 {
-                    if (userScore >= line)
-                    {
-                        // TODO(jcollard: 2022-02-09): If you `retun insertAt`
-                        // here, you don't need the outside do ... while loop.
-                        // Return exits the method immediately, thus exiting the
-                        // loop.
-                        isBigger = true; 
-                    }
-                    else 
+                    if (userScore > line)
                     {
                         insertAt = insertAt + 1;
                     }
+                    else 
+                    {
+                        return insertAt;
+                    }
                 }
-                } while (!isBigger);
-            
             return insertAt;
+            
 
         }
 
@@ -163,7 +177,7 @@ namespace malden_Personal_Project_1
         /// <param name="userScore"></param>
         /// <param name="insertAt"></param>
         /// <param name="scoreList"></param>
-        public static void AddScore(string userName, string userScore, int insertAt, List<string> scoreList)
+        public static void AddScore(string userName, int userScore, int insertAt, List<string> scoreList, string fileName)
         {
             // string entry;
                 // 1. Load in the userName, userScore, insertAt, and scoreList variables. 
@@ -173,13 +187,14 @@ namespace malden_Personal_Project_1
                 // 5. Using File.WriteLines, override all entries in scoresFile.txt to be entries from list scoreList
                 string entry;
                 //insertAt = string.Parse(insertAt);
+                string scoreString = userScore.ToString();
                 entry = $"{userName} {userScore}";
                 scoreList.Insert(insertAt, entry);
                 foreach (string line in scoreList)
                 {
                     Console.WriteLine($"{line}");
                 }
-                File.WriteAllLines("Tests/fake_scores.txt", scoreList); // TODO(jcollard 2022-02-09): It might make sense to add a 5th parameter to this method `string filename`. This is just a suggestion
+                File.WriteAllLines(fileName, scoreList); 
 
         }
     }

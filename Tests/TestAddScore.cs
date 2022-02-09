@@ -10,7 +10,7 @@ namespace malden_Personal_Project_1
         {   
             File.Copy("Tests/fake_scores_clean.txt", "Tests/fake_scores.txt", true);
             string userName = "TestName";
-            string userScore = "900";
+            int userScore = 900;
             int insertAt = 1; 
             List<int> indexTest = new List<int>();
             indexTest.Add(0);
@@ -19,7 +19,7 @@ namespace malden_Personal_Project_1
             indexTest.Add(3);
             List<string> scoreList;
             scoreList = HighScoreTracker.LoadScoresFile("Tests/fake_scores.txt");
-            HighScoreTracker.AddScore(userName, userScore, insertAt, scoreList);
+            HighScoreTracker.AddScore(userName, userScore, insertAt, scoreList, "Tests/fake_scores.txt");
             List<string> scoresCheck;
             scoresCheck = HighScoreTracker.LoadScoresFile("Tests/fake_scores.txt");
             if (scoreList.Count != 4)
