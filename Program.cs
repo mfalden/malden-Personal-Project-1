@@ -66,10 +66,9 @@ namespace malden_Personal_Project_1
                 // 3. add element 2 using int.Parse(scoresOnly[1]);
                 // 4. return list<int> scoresOnly;
 
-            //     List<int> scoresOnly = new List<int>();
-            //     scoreList.Split(' ');
-            //     scoresOnly = int.Parse(scoreList[1]);
-            //     return scoresOnly;
+                // List<int> scoresOnly = new List<int>();
+                // scoresOnly = int.Parse(scoreList.Split(' ')[1]);
+                // return scoresOnly;
             return null;
         }
 
@@ -131,19 +130,24 @@ namespace malden_Personal_Project_1
                 // 5.0 if the user score is equal to scoresOnly, return int insertAt
                 // 5. if the user score is greater than scores only, return int insertAt
                 int insertAt = 0;
+                bool isBigger = false;
+                do 
+                {
                 foreach (int line in scoresOnly)
                 {
-                    if (userScore < line)
+                    if (userScore >= line)
+                    {
+                        isBigger = true;
+                    }
+                    else 
                     {
                         insertAt = insertAt + 1;
                     }
-                    else
-                    {
-                        break;
-                    }
                 }
+                } while (!isBigger);
             
             return insertAt;
+
         }
 
         /// <summary>
