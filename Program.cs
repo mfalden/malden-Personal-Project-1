@@ -69,6 +69,13 @@ namespace malden_Personal_Project_1
                 // List<int> scoresOnly = new List<int>();
                 // scoresOnly = int.Parse(scoreList.Split(' ')[1]);
                 // return scoresOnly;
+
+            // Feedback(jcollard 2022-02-09): Here is an example showing how to
+            // split a single string: https://dotnetfiddle.net/luA0HU
+            
+            // You can use that basic idea but apply it inside of 
+            // a foreach loop which processes each line.
+            // Good luck!
             return null;
         }
 
@@ -131,13 +138,17 @@ namespace malden_Personal_Project_1
                 // 5. if the user score is greater than scores only, return int insertAt
                 int insertAt = 0;
                 bool isBigger = false;
-                do 
+                do  
                 {
                 foreach (int line in scoresOnly)
                 {
                     if (userScore >= line)
                     {
-                        isBigger = true;
+                        // TODO(jcollard: 2022-02-09): If you `retun insertAt`
+                        // here, you don't need the outside do ... while loop.
+                        // Return exits the method immediately, thus exiting the
+                        // loop.
+                        isBigger = true; 
                     }
                     else 
                     {
@@ -173,7 +184,7 @@ namespace malden_Personal_Project_1
                 {
                     Console.WriteLine($"{line}");
                 }
-                File.WriteAllLines("Tests/fake_scores.txt", scoreList);
+                File.WriteAllLines("Tests/fake_scores.txt", scoreList); // TODO(jcollard 2022-02-09): It might make sense to add a 5th parameter to this method `string filename`. This is just a suggestion
 
         }
     }
