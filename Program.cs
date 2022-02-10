@@ -42,7 +42,9 @@ namespace malden_Personal_Project_1
             // bool testUserScore = TestUserScore.RunTest();
             // Console.WriteLine($"Test UserScore(): {testUserScore}");
         }
-
+        /// <summary>
+        /// Runs the program code.
+        /// </summary>
         public static void RunCode()
         {   
             Console.WriteLine("High Score Tracker");
