@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO; 
+using System.IO;
 using System.Linq;
 
 namespace malden_Personal_Project_1
 {
-    
+
     public class HighScoreTracker
-    {   
+    {
 
         public static void Main(string[] args)
         {
@@ -34,7 +34,7 @@ namespace malden_Personal_Project_1
 
             bool testScoreCompare = TestScoreCompare.RunTest();
             Console.WriteLine($"Test ScoreCompare(List<int> scoresOnly, string userScore): {testScoreCompare}");
-            
+
             // because "scoresonly" in test depends on the output of ScoreSplit, test will be unable to run and will throw exceptions.
             // bool testScoreSplit = TestScoreSplit.RunTest();
             // Console.WriteLine($"Test ScoreSplit(List<string> scoreList): {testScoreSplit}");
@@ -46,10 +46,10 @@ namespace malden_Personal_Project_1
         /// Runs the program code.
         /// </summary>
         public static void RunCode()
-        {   
+        {
             Console.WriteLine("High Score Tracker");
             string fileName = "scoresFile.txt";
-            List<string>scoreList = LoadScoresFile(fileName);
+            List<string> scoreList = LoadScoresFile(fileName);
             List<int> scoresOnly = ScoreSplit(scoreList);
             (int userScore, string userName) = UserScore();
             int insertAt = ScoreCompare(scoresOnly, userScore);
@@ -62,17 +62,21 @@ namespace malden_Personal_Project_1
         /// <returns>Returns "ScoreList".</returns>
         public static List<string> LoadScoresFile(string scoresFile)
         {
-                // 1. Create list scoreList
-                // 2. scorelist = file.ReadLines(scoresfile.txt);
-                // 3. return list scorelist
-                List<string> scoreList;
-                if(File.Exists(scoresFile) == false)
-                {
-                    throw new Exception($"The file {scoresFile} does not exist.");
-                }
-                scoreList = File.ReadAllLines(scoresFile).ToList();
-         
-                return scoreList;
+            if (scoresFile == null)
+            {
+                throw new Exception("String scoresFile is null!");
+            }
+            // 1. Create list scoreList
+            // 2. scorelist = file.ReadLines(scoresfile.txt);
+            // 3. return list scorelist
+            List<string> scoreList;
+            if (File.Exists(scoresFile) == false)
+            {
+                throw new Exception($"The file {scoresFile} does not exist.");
+            }
+            scoreList = File.ReadAllLines(scoresFile).ToList();
+
+            return scoreList;
         }
 
         /// <summary>
@@ -83,34 +87,26 @@ namespace malden_Personal_Project_1
         public static List<int> ScoreSplit(List<string> scoreList)
         {
 
-            // TODO(jcollard 2022-02-11):
-            // Your code is fantastic. However, none of your methods actually
-            // meet the proficient requirement to `validate input`.
-            // The requirements specifically means to validate the parameter
-            // inputs. You can easily meet this requirement in this method by
-            // adding a null check. At that point, this method meets all of the
-            // requirements.
-            
             if (scoreList == null)
             {
-                // TODO: throw an exception
+                throw new Exception("String scoreList is null!");
             }
-            
 
-                // 1. Split the scoreList along all spaces (" ")
-                // 2. create new list<int> = scoresOnly
-                // 3. add element 2 using int.Parse(scoresOnly[1]);
-                // 4. return list<int> scoresOnly;
 
-                List<int> scoresOnly = new List<int>();
-                foreach (string line in scoreList)
+            // 1. Split the scoreList along all spaces (" ")
+            // 2. create new list<int> = scoresOnly
+            // 3. add element 2 using int.Parse(scoresOnly[1]);
+            // 4. return list<int> scoresOnly;
+
+            List<int> scoresOnly = new List<int>();
+            foreach (string line in scoreList)
+            {
+                if (!line.Equals(""))
                 {
-                    if (!line.Equals(""))
-                    {
-                        scoresOnly.Add(int.Parse(line.Split(' ')[1]));
-                    }
+                    scoresOnly.Add(int.Parse(line.Split(' ')[1]));
                 }
-                return scoresOnly;
+            }
+            return scoresOnly;
         }
 
         /// <summary>
@@ -120,42 +116,42 @@ namespace malden_Personal_Project_1
         public static (int, string) UserScore()
         {
             // 1. create string userName
-                // 2. create int userScore
-                // 3. display "please type in your name"
-                // 4. collect user input
-                // 5. trim user input
-                // 6. add to string userName
-                // 7. start of loop: display "please type in your score"
-                // 8. collect user input
-                // 9. trim user input
-                // 10. if the score includes letters, display "invalid score" and restart the loop. If the score is only numbers, add the user input to integer userScore
-                // 11. Return int userScore, string userName
+            // 2. create int userScore
+            // 3. display "please type in your name"
+            // 4. collect user input
+            // 5. trim user input
+            // 6. add to string userName
+            // 7. start of loop: display "please type in your score"
+            // 8. collect user input
+            // 9. trim user input
+            // 10. if the score includes letters, display "invalid score" and restart the loop. If the score is only numbers, add the user input to integer userScore
+            // 11. Return int userScore, string userName
             string score;
             bool isValidScore;
 
-            Console.Write("Please type in your name: "); 
-            string userName = Console.ReadLine().Replace(" ", ""); 
+            Console.Write("Please type in your name: ");
+            string userName = Console.ReadLine().Replace(" ", "");
 
             do
             {
-                Console.Write("Enter your score: "); 
+                Console.Write("Enter your score: ");
                 score = Console.ReadLine().Replace(" ", "");
-                isValidScore = true; 
+                isValidScore = true;
                 foreach (char c in score)
                 {
                     if (char.IsDigit(c) == false)
                     {
                         Console.WriteLine("Please type in a valid score.");
-                        isValidScore = false; 
+                        isValidScore = false;
                         break;
-                    } 
+                    }
                 }
-            } while (isValidScore == false); 
-            
-            
+            } while (isValidScore == false);
+
+
             return (int.Parse(score), userName);
         }
-        
+
         /// <summary>
         /// Takes the string "userscore" and compares it to the values in scoresOnly, stopping only when the userScore is greater than the value in an index of scoresOnly.
         /// </summary>
@@ -164,26 +160,31 @@ namespace malden_Personal_Project_1
         /// <returns>returns the index number of the row where userScore was greater than scoresOnly in an integer "insertAt".</returns>
         public static int ScoreCompare(List<int> scoresOnly, int userScore)
         {
-                // 1. load list<int> scoresOnly and int userScore
-                // 2. create new int inserAt and set to 0
-                // 3. start of loop: for each line in scoresOnly--
-                // 4. if the user score is less than scoresOnly, increase int insertAt by one and restart the loop
-                // 5.0 if the user score is equal to scoresOnly, return int insertAt
-                // 5. if the user score is greater than scores only, return int insertAt
-                int insertAt = 0;
-                foreach (int line in scoresOnly)
+            // 1. load list<int> scoresOnly and int userScore
+            // 2. create new int inserAt and set to 0
+            // 3. start of loop: for each line in scoresOnly--
+            // 4. if the user score is less than scoresOnly, increase int insertAt by one and restart the loop
+            // 5.0 if the user score is equal to scoresOnly, return int insertAt
+            // 5. if the user score is greater than scores only, return int insertAt
+            if (scoresOnly == null)
+            {
+                throw new Exception("String scoresOnly is null!");
+            }
+
+            int insertAt = 0;
+            foreach (int line in scoresOnly)
+            {
+                if (userScore > line)
                 {
-                    if (userScore > line)
-                    {
-                        insertAt = insertAt + 1;
-                    }
-                    else 
-                    {
-                        return insertAt;
-                    }
+                    insertAt = insertAt + 1;
                 }
+                else
+                {
+                    return insertAt;
+                }
+            }
             return insertAt;
-            
+
 
         }
 
@@ -197,21 +198,32 @@ namespace malden_Personal_Project_1
         public static void AddScore(string userName, int userScore, int insertAt, List<string> scoreList, string fileName)
         {
             // string entry;
-                // 1. Load in the userName, userScore, insertAt, and scoreList variables. 
-                // 2. Create String "entry" $"{userName} {userScore}"
-                // 3. Insert "entry" at index "insertAt" 
-                // 4. Using WriteLine, Display list scoreList
-                // 5. Using File.WriteLines, override all entries in scoresFile.txt to be entries from list scoreList
-                string entry;
-                //insertAt = string.Parse(insertAt);
-                string scoreString = userScore.ToString();
-                entry = $"{userName} {userScore}";
-                scoreList.Insert(insertAt, entry);
-                foreach (string line in scoreList)
-                {
-                    Console.WriteLine($"{line}");
-                }
-                File.WriteAllLines(fileName, scoreList); 
+            // 1. Load in the userName, userScore, insertAt, and scoreList variables. 
+            // 2. Create String "entry" $"{userName} {userScore}"
+            // 3. Insert "entry" at index "insertAt" 
+            // 4. Using WriteLine, Display list scoreList
+            // 5. Using File.WriteLines, override all entries in scoresFile.txt to be entries from list scoreList
+            if (userName == null)
+            {
+                throw new Exception("String userName is null!");
+            }
+            if (scoreList == null)
+            {
+                throw new Exception("List scoreList is null!");
+            }
+            if (fileName == null)
+            {
+                throw new Exception("String fileName is null!");
+            }
+            string entry;
+            string scoreString = userScore.ToString();
+            entry = $"{userName} {userScore}";
+            scoreList.Insert(insertAt, entry);
+            foreach (string line in scoreList)
+            {
+                Console.WriteLine($"{line}");
+            }
+            File.WriteAllLines(fileName, scoreList);
 
         }
     }
