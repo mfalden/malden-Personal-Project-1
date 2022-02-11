@@ -82,6 +82,21 @@ namespace malden_Personal_Project_1
         /// <returns>Returns int list "ScoresOnly".</returns>
         public static List<int> ScoreSplit(List<string> scoreList)
         {
+
+            // TODO(jcollard 2022-02-11):
+            // Your code is fantastic. However, none of your methods actually
+            // meet the proficient requirement to `validate input`.
+            // The requirements specifically means to validate the parameter
+            // inputs. You can easily meet this requirement in this method by
+            // adding a null check. At that point, this method meets all of the
+            // requirements.
+            
+            if (scoreList == null)
+            {
+                // TODO: throw an exception
+            }
+            
+
                 // 1. Split the scoreList along all spaces (" ")
                 // 2. create new list<int> = scoresOnly
                 // 3. add element 2 using int.Parse(scoresOnly[1]);
