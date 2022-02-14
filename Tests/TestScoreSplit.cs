@@ -34,7 +34,7 @@ namespace malden_Personal_Project_1
                 return false;
             }
 
-            return false;
+            return true;
         }
     }
 }
