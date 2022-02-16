@@ -1,0 +1,6 @@
+Welcome! 0
+Marielle 100
+User2 800
+codetest 897
+User 9000
+AustinKim 100000
