@@ -183,12 +183,12 @@ Result of the first call:
 
 Result of the second call:
 
-if scoreList:
+if scoreList is:
 User1 500
 User2 1000
 User3 1500
 
-then output:
+then output is:
 500
 1000
 1500
